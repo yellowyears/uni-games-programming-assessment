@@ -11,7 +11,7 @@ class Projectile
     sf::CircleShape shape;
     sf::Vector2f velocity;
     float lifeTime;
-    std::vector<Trail*> trails;   /******************************************Task ii - use  std::unique_ptr for managing trail objects ***********************/
+    std::vector<std::unique_ptr<Trail>> trails;   /******************************************Task ii - use  std::unique_ptr for managing trail objects ***********************/
     float trailTimer = 0.f; 
 
 public:
@@ -38,10 +38,10 @@ public:
         if (trailTimer >= 0.05f) 
         {
             trailTimer = 0.f;
-            trails.push_back(new Trail(shape.getPosition(), 2.f));
+            trails.push_back(std::make_unique<Trail>(new Trail(shape.getPosition(), 2.f)));
         }
 
-        for (auto it = trails.begin(); it != trails.end();)     //update trai objcets and remove dead trail objects
+        for (auto it = trails.begin(); it != trails.end();)     //update trail objects and remove dead trail objects
         {
             (*it)->update(dt);
             if ((*it)->dead()) {
