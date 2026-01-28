@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="WindowManager.cpp" />
+    <ClCompile Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseEnemy.h" />
@@ -149,7 +150,6 @@
     <ClInclude Include="SmartEnemy.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Trail.h" />
-    <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
