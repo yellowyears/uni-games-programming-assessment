@@ -48,6 +48,10 @@ public:
 		}
 	}
 
+	~GameManager() {
+		std::cout << "This GameManager has been destroyed";
+	}
+
 private:
 	//collision resolution methods
 	void resolvePlayerCollisionWithEnemies(Player& player, std::vector<BaseEnemy*>& baseEnemies, std::vector<SmartEnemy*>& smartEnemies)
