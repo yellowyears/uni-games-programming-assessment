@@ -38,7 +38,7 @@ public:
         if (trailTimer >= 0.05f) 
         {
             trailTimer = 0.f;
-            trails.push_back(std::make_unique<Trail>(new Trail(shape.getPosition(), 2.f)));
+            trails.push_back(std::make_unique<Trail>(shape.getPosition(), 2.f));
         }
 
         for (auto it = trails.begin(); it != trails.end();)     //update trail objects and remove dead trail objects
