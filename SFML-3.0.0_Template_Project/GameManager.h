@@ -28,7 +28,7 @@ public:
 	/*********************************Task A - iii * ************************************************************
 	Add a destructor to the GameManager class to properly release dynamically allocated memory and clean up resources when the objects are destroyed.
 	************************************************************************************************************************/
-	
+
 	void draw(sf::RenderWindow& window) const
 	{
 		roomManager->draw(window);
@@ -58,7 +58,7 @@ private:
 	{
 		for (size_t i = 0; i < baseEnemies.size(); ++i)
 		{
-			if (checkCollisionBetweenBaseEnemyAndPlayer(*baseEnemies[i], player))
+			if (CheckCollisionBetweenTwoObjects(*baseEnemies[i], player))
 			{
 				if (!player.getShieldStatus())
 				{
@@ -74,7 +74,7 @@ private:
 
 		for (size_t i = 0; i < smartEnemies.size(); ++i)
 		{
-			if (checkCollisionBetweenSmartEnemyAndPlayer(*smartEnemies[i], player))
+			if (CheckCollisionBetweenTwoObjects(*smartEnemies[i], player))
 			{
 				if (!player.getShieldStatus())
 				{
@@ -95,7 +95,7 @@ private:
 		{
 			for (size_t j = 0; j < projectiles.size(); ++j)
 			{
-				if (checkCollisionBetweenProjectileAndBaseEnemy(*baseEnemies[i], *projectiles[j]))
+				if (CheckCollisionBetweenTwoObjects(*baseEnemies[i], *projectiles[j]))
 				{
 					score++;
 					WindowManager::getInstance().updateScore(score);
@@ -113,7 +113,7 @@ private:
 		{
 			for (size_t j = 0; j < projectiles.size(); ++j)
 			{
-				if (checkCollisionBetweenProjectileAndSmartEnemy(*smartEnemies[i], *projectiles[j]))
+				if (CheckCollisionBetweenTwoObjects(*smartEnemies[i], *projectiles[j]))
 				{
 					score++;
 					WindowManager::getInstance().updateScore(score);
@@ -130,8 +130,9 @@ private:
 	Refactor the similar collision detection methods to use a single function template instead, name it CheckCollisionBetweenTwoObjects.
 	************************************************************************************************************************/
 
-	//collision detection methods
-	bool checkCollisionBetweenBaseEnemyAndPlayer(BaseEnemy& enemy, Player& player) const
+	// Collision detection method
+	// Uses a generic template so it can be repurposed easily for multiple different uses
+	template <typename T1, typename T2> bool CheckCollisionBetweenTwoObjects(const T1& enemy, const T2& player)
 	{
 		sf::Vector2f pos1 = enemy.getPosition();
 		sf::Vector2f pos2 = player.getPosition();
@@ -140,35 +141,4 @@ private:
 		float combinedRadii = enemy.getRadius() + player.getRadius();
 		return distance <= combinedRadii;
 	}
-
-	bool checkCollisionBetweenSmartEnemyAndPlayer(SmartEnemy& enemy, Player& player) const
-	{
-		sf::Vector2f pos1 = enemy.getPosition();
-		sf::Vector2f pos2 = player.getPosition();
-
-		float distance = std::sqrt(std::pow(pos2.x - pos1.x, 2) + std::pow(pos2.y - pos1.y, 2));
-		float combinedRadii = enemy.getRadius() + player.getRadius();
-		return distance <= combinedRadii;
-	}
-
-	bool checkCollisionBetweenProjectileAndBaseEnemy(BaseEnemy& enemy, Projectile& projectile) const
-	{
-		sf::Vector2f pos1 = enemy.getPosition();
-		sf::Vector2f pos2 = projectile.getPosition();
-
-		float distance = std::sqrt(std::pow(pos2.x - pos1.x, 2) + std::pow(pos2.y - pos1.y, 2));
-		float combinedRadii = enemy.getRadius() + projectile.getRadius();
-		return distance <= combinedRadii;
-	}
-
-	bool checkCollisionBetweenProjectileAndSmartEnemy(SmartEnemy& enemy, Projectile& projectile) const
-	{
-		sf::Vector2f pos1 = enemy.getPosition();
-		sf::Vector2f pos2 = projectile.getPosition();
-
-		float distance = std::sqrt(std::pow(pos2.x - pos1.x, 2) + std::pow(pos2.y - pos1.y, 2));
-		float combinedRadii = enemy.getRadius() + projectile.getRadius();
-		return distance <= combinedRadii;
-	}
-
 };
