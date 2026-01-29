@@ -24,7 +24,7 @@ public:
         shape.setFillColor(sf::Color::Yellow);
     }
 
-    sf::Vector2f getPosition() 
+    sf::Vector2f getPosition() const
     {
         return shape.getPosition();
     }
@@ -53,7 +53,7 @@ public:
         }
     }
 
-    void draw(sf::RenderWindow& window) 
+    void draw(sf::RenderWindow& window)
     {
         for (auto& t : trails) {
             t->draw(window);
@@ -61,17 +61,17 @@ public:
         window.draw(shape);
     }
 
-    bool shouldDestroy()  
+    bool shouldDestroy() const
     {
         return lifeTime < 0;
     }
 
-    sf::FloatRect bounds()  
+    sf::FloatRect bounds() const
     {
         return shape.getGlobalBounds();
     }
 
-    float getRadius() 
+    float getRadius() const
     {
         return shape.getRadius();
     }
