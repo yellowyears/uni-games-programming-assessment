@@ -15,7 +15,7 @@ class Projectile
     float trailTimer = 0.f; 
 
 public:
-    Projectile(sf::Vector2f& pos, sf::Vector2f& vel)
+    Projectile(const sf::Vector2f& pos, const sf::Vector2f& vel)
         : velocity(vel), lifeTime(2.f)
     {
         shape.setRadius(3.f);
@@ -53,9 +53,9 @@ public:
         }
     }
 
-    void draw(sf::RenderWindow& window)
+    void draw(sf::RenderWindow& window) const
     {
-        for (auto& t : trails) {
+        for (const auto& t : trails) {
             t->draw(window);
         }
         window.draw(shape);
