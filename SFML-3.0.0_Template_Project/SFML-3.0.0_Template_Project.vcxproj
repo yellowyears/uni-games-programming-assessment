@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SmartEnemyShieldStates.cpp" />
     <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="WindowManager.h" />
   </ItemGroup>
@@ -149,6 +150,8 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="RoomManager.h" />
     <ClInclude Include="SmartEnemy.h" />
+    <ClInclude Include="SmartEnemyShieldStates.h" />
+    <ClInclude Include="SmartEnemyState.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Trail.h" />
   </ItemGroup>
