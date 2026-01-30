@@ -3,6 +3,9 @@
 #include "RoomManager.h"
 #include "GameManager.h"
 
+// Finn Gareth Evans
+// 24825947
+
 int main()
 {
     // Create the main window
