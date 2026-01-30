@@ -5,6 +5,12 @@
 #include "RoomManager.h"
 #include "WindowManager.h"
 
+#include <SFML/Audio.hpp>
+#include "SoundManager.h"
+
+#include <filesystem>
+#include <iostream>
+
 class GameManager
 {
 	Player* player;
@@ -23,6 +29,8 @@ public:
 		player = new Player(projectiles, sf::Vector2f(windowSize.x / 2, windowSize.y / 2));
 		roomManager = new RoomManager(sf::FloatRect({ 0,0 }, sf::Vector2f(windowSize.x, windowSize.y)), baseEnemies, smartEnemies, level);
 		WindowManager::getInstance().updateLevel(level);
+
+		SoundManager::Instance(); // empty call to initialise and load sounds before player can control game
 	}
 
 	/*********************************Task A - iii * ************************************************************
@@ -139,6 +147,13 @@ private:
 
 		float distance = std::sqrt(std::pow(pos2.x - pos1.x, 2) + std::pow(pos2.y - pos1.y, 2));
 		float combinedRadii = enemy.getRadius() + player.getRadius();
-		return distance <= combinedRadii;
+
+		if (distance <= combinedRadii) {
+			SoundManager::Instance().PlayHitSound();
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 };

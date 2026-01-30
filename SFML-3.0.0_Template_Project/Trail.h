@@ -39,7 +39,7 @@ public:
 
 	~Trail()
 	{
-		std::cout << "Dead trail destroyed!\n";
+		std::cout << "Dead traill destroyed!\n";
 	}
 private:
 	sf::CircleShape circle;
